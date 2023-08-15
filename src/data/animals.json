@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "name": "🐙 Octopus",
+    "categories": { "habitat": "water" },
+    "ranges": { "age": 5, "weight": 15, "speed": 40 }
+  },
+  {
+    "id": 2,
+    "name": "🐭 Rat",
+    "categories": { "habitat": "land" },
+    "ranges": { "age": 3, "weight": 0.4, "speed": 20 }
+  },
+  {
+    "id": 3,
+    "name": "🐬 Doplhin",
+    "categories": { "habitat": "water" },
+    "ranges": { "age": 15, "weight": 120, "speed": 60 }
+  },
+  {
+    "id": 4,
+    "name": "🐆 Leopard",
+    "categories": { "habitat": "land" },
+    "ranges": { "age": 12, "weight": 50, "speed": 70 }
+  },
+  {
+    "id": 7,
+    "name": "🦆 Duck",
+    "categories": { "habitat": ["air", "land", "water"] },
+    "ranges": { "age": 8, "weight": 4, "speed": 70 }
+  },
+  {
+    "id": 8,
+    "name": "🦅 Eagle",
+    "categories": { "habitat": ["air", "land"] },
+    "ranges": { "age": 25, "weight": 5, "speed": 120 }
+  }
+]

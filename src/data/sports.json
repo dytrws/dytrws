@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "⚽️ Soccer",
+    "ranges": { "duration": 90, "players": 11 }
+  },
+  {
+    "id": 2,
+    "name": "🏀 Basketball",
+    "ranges": { "duration": 48, "players": 5 }
+  },
+  {
+    "id": 3,
+    "name": "🏈 Football",
+    "ranges": { "duration": 60, "players": 11 }
+  },
+  {
+    "id": 4,
+    "name": "⚾️ Baseball",
+    "ranges": { "duration": 160, "players": 13 }
+  },
+  {
+    "id": 5,
+    "name": "🎾 Tennis",
+    "ranges": { "duration": 90, "players": 1 }
+  },
+  {
+    "id": 6,
+    "name": "🏐 Volleyball",
+    "ranges": { "duration": 90, "players": 6 }
+  }
+]
