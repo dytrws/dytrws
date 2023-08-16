@@ -28,5 +28,15 @@
     "id": 6,
     "name": "🏐 Volleyball",
     "ranges": { "duration": 90, "players": 6 }
+  },
+  {
+    "id": 7,
+    "name": "🏒 Hockey",
+    "ranges": { "duration": 60, "players": 6 }
+  },
+  {
+    "id": 8,
+    "name": "🏉 Rugby",
+    "ranges": { "duration": 80, "players": 15 }
   }
 ]

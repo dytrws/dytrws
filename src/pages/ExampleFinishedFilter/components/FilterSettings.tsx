@@ -2,23 +2,12 @@ import { Checkboxgroup } from "./Checkboxgroup";
 import { RangeSlider } from "./RangeSlider";
 import { TextSearch } from "./TextSearch";
 import { FilterReset } from "./FilterReset";
-import { TFilter } from "../filter.types";
+import { useFilterContext } from "../hooks/useFilterContext";
 
-interface Props {
-  filters: TFilter;
-  updateCategory: (id: string, optionid: string, value: boolean) => void;
-  updateSearch: (value: string) => void;
-  updateRange: (id: string, value: number) => void;
-  reset: () => void;
-}
+export function FilterSettings() {
+  const { filters, updateCategory, updateRange, updateSearch, reset } =
+    useFilterContext();
 
-export function FilterSettings({
-  filters,
-  updateCategory,
-  updateSearch,
-  updateRange,
-  reset,
-}: Props) {
   return (
     <div className="filter__settings">
       <div className="filter__settings-header-container">

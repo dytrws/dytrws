@@ -1,13 +1,11 @@
-import { Item } from "../filter.types";
 import { FilterReset } from "./FilterReset";
+import { useFilterContext } from "../hooks/useFilterContext";
 
-interface Props {
-  items: Item[];
-  search: string;
-  reset: () => void;
-}
+export function FilterResults() {
+  const { reset } = useFilterContext();
+  const { filters, filterResults: items } = useFilterContext();
+  const search = filters.search.value;
 
-export function FilterResults({ items, search, reset }: Props) {
   function formatSearchString(string: string, search: string) {
     if (string && search) {
       return {

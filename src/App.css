@@ -177,6 +177,7 @@ input[type="checkbox"] + label {
   border-radius: 6px;
   list-style: none;
   overflow: hidden;
+  width: 30rem;
 }
 
 .chapters ul li + li {

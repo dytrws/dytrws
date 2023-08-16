@@ -70,6 +70,7 @@ export default function App() {
       <div className="spacer">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/examples/" element={<Home />} />
           <Route path="/examples/jsx/" element={<ExampleJSX />} />
           <Route
             path="/examples/filterlist/"

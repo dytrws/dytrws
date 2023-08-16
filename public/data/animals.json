@@ -34,5 +34,47 @@
     "name": "🦅 Eagle",
     "categories": { "habitat": ["air", "land"] },
     "ranges": { "age": 25, "weight": 5, "speed": 120 }
+  },
+  {
+    "id": 9,
+    "name": "🦈 Shark",
+    "categories": { "habitat": "water" },
+    "ranges": { "age": 20, "weight": 300, "speed": 60 }
+  },
+  {
+    "id": 10,
+    "name": "🐢 Turtle",
+    "categories": { "habitat": "land" },
+    "ranges": { "age": 100, "weight": 200, "speed": 5 }
+  },
+  {
+    "id": 11,
+    "name": "🐝 Bee",
+    "categories": { "habitat": "air" },
+    "ranges": { "age": 1, "weight": 0.1, "speed": 12 }
+  },
+  {
+    "id": 12,
+    "name": "🦘 Kangaroo",
+    "categories": { "habitat": "land" },
+    "ranges": { "age": 20, "weight": 60, "speed": 70 }
+  },
+  {
+    "id": 13,
+    "name": "🐧 Penguin",
+    "categories": { "habitat": ["land", "water"] },
+    "ranges": { "age": 15, "weight": 20, "speed": 40 }
+  },
+  {
+    "id": 14,
+    "name": "🐍 Snake",
+    "categories": { "habitat": "land" },
+    "ranges": { "age": 10, "weight": 1, "speed": 10 }
+  },
+  {
+    "id": 15,
+    "name": "🐻 Bear",
+    "categories": { "habitat": "land" },
+    "ranges": { "age": 25, "weight": 200, "speed": 40 }
   }
 ]
