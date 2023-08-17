@@ -15,7 +15,6 @@ export function ExampleFilterWithTabs() {
   const options = ["food", "animals", "sports"];
   const [activeTab, setActiveTab] = useState(options[0]);
 
-  console.log(items[activeTab]);
   return (
     <>
       <Tabs options={options} active={activeTab} onUpdate={setActiveTab} />

@@ -69,8 +69,7 @@ export default function App() {
       </div>
       <div className="spacer">
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/examples/" element={<Home />} />
+          <Route path="/" element={<ExampleFinishedFilter />} />
           <Route path="/examples/jsx/" element={<ExampleJSX />} />
           <Route
             path="/examples/filterlist/"
@@ -94,7 +93,7 @@ export default function App() {
             path="/examples/finishedfilter/"
             element={<ExampleFinishedFilter />}
           />
-          <Route path="*" element={<Home />} />
+          <Route path="*" element={<ExampleFinishedFilter />} />
         </Routes>
       </div>
     </>

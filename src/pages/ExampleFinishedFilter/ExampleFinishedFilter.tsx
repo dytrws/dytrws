@@ -8,16 +8,22 @@ export function ExampleFinishedFilter() {
   const [items, setItems] = useState<Item[]>();
 
   useEffect(() => {
+    let ignore = false;
     setItems(undefined);
-    fetch(`/data/${activeFilter}.json`)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
+
+    async function startFetching() {
+      const response = await fetch(`/data/${activeFilter}.json`);
+      const data = await response.json();
+
+      if (!ignore) {
         setItems(data);
-      });
+      }
+    }
+
+    startFetching();
 
     return () => {
-      setItems(undefined);
+      ignore = true;
     };
   }, [activeFilter, setItems]);
 
