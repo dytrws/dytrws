@@ -1,10 +1,10 @@
-interface Props {
+interface TextSearchProps {
   value: string;
   onUpdate: (e: React.ChangeEvent<HTMLInputElement>) => void;
   [x: string]: any;
 }
 
-export function TextSearch({ value, onUpdate, restProps }: Props) {
+export function TextSearch({ value, onUpdate, restProps }: TextSearchProps) {
   return (
     <input
       {...restProps}

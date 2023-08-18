@@ -18,15 +18,13 @@ export type SearchFilter = {
   value: string;
 };
 
-export type CategoryFilter = { options: Option[] };
-export type CategoryFilters = { [key: string]: CategoryFilter };
+export type CategoryFilters = { [key: string]: { options: Option[] } };
 
-export type RangeFilter = { min: number; max: number; value: number };
 export type RangeFilters = {
-  [key: string]: RangeFilter;
+  [key: string]: { min: number; max: number; value: number };
 };
 
-export type TFilter = {
+export type Filter = {
   search: SearchFilter;
   categories: CategoryFilters;
   ranges: RangeFilters;

@@ -1,7 +1,7 @@
 import { useId } from "react";
 import { Option } from "../filter.types";
 
-interface Props {
+interface CheckboxgroupProps {
   label: string;
   options: Option[];
   onUpdate: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -13,7 +13,7 @@ export function Checkboxgroup({
   options,
   onUpdate,
   ...restProps
-}: Props) {
+}: CheckboxgroupProps) {
   const htmlId = useId();
   return (
     <div {...restProps}>
@@ -23,7 +23,7 @@ export function Checkboxgroup({
           <li key={option.id}>
             <input
               id={`${htmlId}_${option.id}`}
-              name={option.id}
+              name={`checkbox-group_${label}`}
               type="checkbox"
               value={option.id}
               checked={option.value}

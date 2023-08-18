@@ -1,9 +1,10 @@
+import { Action, Filter } from "../filter.types";
+// without immer:
 // import { useReducer } from "react";
-import { Action, TFilter } from "../filter.types";
 import { useImmerReducer } from "use-immer";
 
-export function useFilter(initialState: TFilter) {
-  function reducer(state: TFilter, action: Action) {
+export function useFilter(initialState: Filter) {
+  function reducer(state: Filter, action: Action) {
     switch (action.type) {
       case "SET_SEARCH":
         // without immer:

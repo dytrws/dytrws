@@ -1,35 +1,17 @@
 import { Filter } from "./components/Filter";
 import { Tabs } from "./components/Tabs";
-import { useEffect, useState } from "react";
-import { Item } from "./filter.types";
+import { useState } from "react";
+import { useFetch } from "./hooks/useFetch";
+
+function createUrlFromId(id: string) {
+  return `/data/${id}.json`;
+}
 
 export function ExampleFinishedFilter() {
   const [activeFilter, setActiveFilter] = useState("food");
-  const [items, setItems] = useState<Item[]>();
+  const url = createUrlFromId(activeFilter);
+  const items = useFetch(url);
 
-  useEffect(() => {
-    let ignore = false;
-    setItems(undefined);
-
-    async function startFetching() {
-      const response = await fetch(`/data/${activeFilter}.json`);
-      const data = await response.json();
-
-      if (!ignore) {
-        setItems(data);
-      }
-    }
-
-    startFetching();
-
-    return () => {
-      ignore = true;
-    };
-  }, [activeFilter, setItems]);
-
-  // [LEARNING OPPORTUNITY]: disable/enable key attribute
-  // [LEARNING OPPORTUNITY]: work with use/Suspense
-  // [LEARNING OPPORTUNITY]: explain react-Router
   return (
     <>
       <Tabs

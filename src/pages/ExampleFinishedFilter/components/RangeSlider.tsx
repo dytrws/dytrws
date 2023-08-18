@@ -1,4 +1,4 @@
-interface Props {
+interface RangeSliderProps {
   label: string;
   min: number;
   max: number;
@@ -14,7 +14,7 @@ export function RangeSlider({
   value,
   onUpdate,
   ...restProps
-}: Props) {
+}: RangeSliderProps) {
   return (
     <>
       <h3>{label}</h3>

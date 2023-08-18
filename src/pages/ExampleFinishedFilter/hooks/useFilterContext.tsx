@@ -1,18 +1,18 @@
 import { createContext, useContext, useMemo } from "react";
-import { Item, TFilter } from "../filter.types";
 import { useFilter } from "./useFilter";
-import { extractFilterOptionsFromDataset } from "../shared/functions";
+import {
+  Item,
+  Filter,
+  SearchFilter,
+  CategoryFilters,
+  RangeFilters,
+} from "../filter.types";
 
-type FilterContext = {
-  filters: TFilter;
-  filterResults: Item[];
-  updateCategory: (id: string, optionid: string, value: boolean) => void;
-  updateRange: (id: string, value: number) => void;
-  updateSearch: (value: string) => void;
-  reset: () => void;
-};
+type FilterContextType =
+  | (ReturnType<typeof useFilter> & { filterResults: Item[] })
+  | null;
 
-export const FilterContext = createContext<FilterContext | null>(null);
+const FilterContext = createContext<FilterContextType>(null);
 
 type FilterContextProviderProps = {
   children: React.ReactNode;
@@ -23,61 +23,19 @@ export function FilterContextProvider({
   children,
   items,
 }: FilterContextProviderProps) {
-  const filterOptions = extractFilterOptionsFromDataset(items);
+  const filterOptions = extractFilterOptionsFromItems(items);
   const { filters, updateCategory, updateRange, updateSearch, reset } =
     useFilter(filterOptions);
 
   const filterResults = useMemo(() => {
-    let filtereditems = items;
-
-    if (filters.search.value) {
-      filtereditems = items.filter((item) =>
-        item.name.toLowerCase().includes(filters.search.value.toLowerCase())
-      );
-    }
-
-    for (const key in filters.categories) {
-      if (filtereditems.length === 0) {
-        return filtereditems;
-      }
-
-      if (filters.categories[key].options.every((option) => !option.value)) {
-        continue;
-      }
-
-      filtereditems = items.filter((item) =>
-        filters.categories[key].options.find((option) => {
-          const comparision = item.categories[key];
-          if (Array.isArray(comparision)) {
-            return option.value && comparision.includes(option.id);
-          } else if (typeof comparision === "string") {
-            console.log(comparision, option.id);
-            return option.value && comparision === option.id;
-          }
-
-          return false;
-        })
-      );
-    }
-
-    for (const key in filters.ranges) {
-      if (filtereditems.length === 0) {
-        return filtereditems;
-      }
-
-      filtereditems = filtereditems.filter((item) => {
-        return item.ranges[key] <= filters.ranges[key].value;
-      });
-    }
-
-    return filtereditems;
-  }, [filters, items]);
+    return filterItems(items, filters);
+  }, [items, filters]);
 
   return (
     <FilterContext.Provider
       value={{
-        filters,
         filterResults,
+        filters,
         updateCategory,
         updateRange,
         updateSearch,
@@ -99,4 +57,117 @@ export function useFilterContext() {
   }
 
   return context;
+}
+
+function filterItems(items: Item[], filter: Filter) {
+  let filteredItems = items;
+
+  if (filter.search.value) {
+    filteredItems = items.filter((item) =>
+      item.name.toLowerCase().includes(filter.search.value.toLowerCase())
+    );
+  }
+
+  for (const key in filter.categories) {
+    if (filteredItems.length === 0) {
+      return filteredItems;
+    }
+
+    if (filter.categories[key].options.every((option) => !option.value)) {
+      continue;
+    }
+
+    filteredItems = items.filter((item) =>
+      filter.categories[key].options.find((option) => {
+        const comparision = item.categories[key];
+        if (Array.isArray(comparision)) {
+          return option.value && comparision.includes(option.id);
+        } else if (typeof comparision === "string") {
+          console.log(comparision, option.id);
+          return option.value && comparision === option.id;
+        }
+
+        return false;
+      })
+    );
+  }
+
+  for (const key in filter.ranges) {
+    if (filteredItems.length === 0) {
+      return filteredItems;
+    }
+
+    filteredItems = filteredItems.filter((item) => {
+      return item.ranges[key] <= filter.ranges[key].value;
+    });
+  }
+
+  return filteredItems;
+}
+
+function extractFilterOptionsFromItems(items: Item[]) {
+  const search: SearchFilter = { value: "" };
+  const categories: CategoryFilters = {};
+  const ranges: RangeFilters = {};
+
+  function handleCategory(
+    categoryId: string,
+    categoryValue: string | string[]
+  ) {
+    if (!(categoryId in categories)) {
+      categories[categoryId] = {
+        options: [],
+      };
+    }
+
+    if (Array.isArray(categoryValue)) {
+      for (const optionId of categoryValue) {
+        handleOption(categoryId, optionId);
+      }
+    } else if (typeof categoryValue === "string") {
+      handleOption(categoryId, categoryValue);
+    }
+  }
+
+  function handleOption(categoryId: string, optionId: string) {
+    if (
+      !categories[categoryId].options.some((option) => option.id === optionId)
+    ) {
+      categories[categoryId].options.push({
+        id: optionId,
+        value: false,
+      });
+    }
+  }
+
+  function handleRange(rangeId: string, rangeValue: number) {
+    if (!(rangeId in ranges)) {
+      ranges[rangeId] = { min: 0, max: 0, value: 0 };
+    }
+
+    if (rangeValue < ranges[rangeId].min) {
+      ranges[rangeId].min = rangeValue;
+    }
+
+    if (rangeValue > ranges[rangeId].max) {
+      ranges[rangeId].max = rangeValue;
+      ranges[rangeId].value = rangeValue;
+    }
+  }
+
+  for (const item of items) {
+    for (const categoryId in item.categories) {
+      handleCategory(categoryId, item.categories[categoryId]);
+    }
+
+    for (const rangekey in item.ranges) {
+      handleRange(rangekey, item.ranges[rangekey]);
+    }
+  }
+
+  return {
+    search,
+    categories,
+    ranges,
+  };
 }

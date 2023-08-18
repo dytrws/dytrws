@@ -8,7 +8,7 @@ import { ExampleFilterWithTabs } from "./pages/ExampleFilterWithTabs/ExampleFilt
 import { ExampleFilterResults } from "./pages/ExampleFilterResults/ExampleFilterResults.tsx";
 import { ExampleFinishedFilter } from "./pages/ExampleFinishedFilter/ExampleFinishedFilter.tsx";
 import { ComingSoon } from "./pages/ComingSoon/ComingSoon.tsx";
-import { Home } from "./pages/Home/Home.tsx";
+// import { Home } from "./pages/Home/Home.tsx";
 
 export default function App() {
   return (
