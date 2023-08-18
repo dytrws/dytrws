@@ -2,20 +2,20 @@ export interface Item {
   id: number;
   name: string;
   categories: {
-    [id: string]: string | string[];
+    [x: string]: string | string[];
   };
   ranges: {
-    [id: string]: number;
+    [x: string]: number;
   };
 }
+
+export type SearchFilter = {
+  value: string;
+};
 
 export type Option = {
   id: string;
   value: boolean;
-};
-
-export type SearchFilter = {
-  value: string;
 };
 
 export type CategoryFilters = { [key: string]: { options: Option[] } };
@@ -30,7 +30,10 @@ export type Filter = {
   ranges: RangeFilters;
 };
 
-export type Action =
+export type FilterAction =
+  | {
+      type: "RESET";
+    }
   | {
       type: "SET_SEARCH";
       payload: {
@@ -44,7 +47,4 @@ export type Action =
   | {
       type: "SET_RANGE";
       payload: { id: string; value: number };
-    }
-  | {
-      type: "RESET";
     };

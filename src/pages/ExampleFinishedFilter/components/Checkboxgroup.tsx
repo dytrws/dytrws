@@ -1,5 +1,5 @@
 import { useId } from "react";
-import { Option } from "../filter.types";
+import { Option } from "../types";
 
 interface CheckboxgroupProps {
   label: string;

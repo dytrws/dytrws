@@ -1,11 +1,15 @@
-import { Action, Filter } from "../filter.types";
+import { FilterAction, Filter } from "../types";
 // without immer:
 // import { useReducer } from "react";
 import { useImmerReducer } from "use-immer";
 
 export function useFilter(initialState: Filter) {
-  function reducer(state: Filter, action: Action) {
+  function reducer(state: Filter, action: FilterAction) {
     switch (action.type) {
+      case "RESET":
+        // because we wrote immutable code we can very easily reset to our initial state
+        // which could be different from a state with everything on false/empty.
+        return initialState;
       case "SET_SEARCH":
         // without immer:
         // return { ...state, search: { value: action.payload.value } };
@@ -38,7 +42,6 @@ export function useFilter(initialState: Filter) {
           optionElement.value = action.payload.value;
         }
         break;
-
       case "SET_RANGE":
         // without immer:
         // return {
@@ -53,30 +56,36 @@ export function useFilter(initialState: Filter) {
         // };
         state.ranges[action.payload.id].value = action.payload.value;
         break;
-      case "RESET":
-        // because we wrote immutable code we can very easily reset to our initial state
-        // which could be different from a state with everything on false/empty.
-        return initialState;
       default:
         throw new Error();
     }
   }
 
   // without immer:
-  // const [filters, dispatchFilters] = useReducer(
+  // const [filters, dispatchFilters] = useReducer(reducer, initialState);
   const [filters, dispatchFilters] = useImmerReducer(reducer, initialState);
+
+  function reset() {
+    dispatchFilters({ type: "RESET" });
+  }
+
+  function updateSearch(value: string) {
+    dispatchFilters({ type: "SET_SEARCH", payload: { value } });
+  }
+
+  function updateCategory(id: string, optionid: string, value: boolean) {
+    dispatchFilters({ type: "SET_CATEGORY", payload: { id, optionid, value } });
+  }
+
+  function updateRange(id: string, value: number) {
+    dispatchFilters({ type: "SET_RANGE", payload: { id, value } });
+  }
 
   return {
     filters,
-    updateCategory: (id: string, optionid: string, value: boolean) =>
-      dispatchFilters({
-        type: "SET_CATEGORY",
-        payload: { id, optionid, value },
-      }),
-    updateRange: (id: string, value: number) =>
-      dispatchFilters({ type: "SET_RANGE", payload: { id, value } }),
-    updateSearch: (value: string) =>
-      dispatchFilters({ type: "SET_SEARCH", payload: { value } }),
-    reset: () => dispatchFilters({ type: "RESET" }),
+    reset,
+    updateSearch,
+    updateCategory,
+    updateRange,
   };
 }

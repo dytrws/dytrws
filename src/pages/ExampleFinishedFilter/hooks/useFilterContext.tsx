@@ -1,4 +1,4 @@
-import { createContext, useContext, useMemo } from "react";
+import { createContext, useContext, useDeferredValue, useMemo } from "react";
 import { useFilter } from "./useFilter";
 import {
   Item,
@@ -6,7 +6,7 @@ import {
   SearchFilter,
   CategoryFilters,
   RangeFilters,
-} from "../filter.types";
+} from "../types";
 
 type FilterContextType =
   | (ReturnType<typeof useFilter> & { filterResults: Item[] })
@@ -27,19 +27,21 @@ export function FilterContextProvider({
   const { filters, updateCategory, updateRange, updateSearch, reset } =
     useFilter(filterOptions);
 
+  // performance optimiziations for huge item lists
+  const defferedFilters = useDeferredValue(filters);
   const filterResults = useMemo(() => {
     return filterItems(items, filters);
-  }, [items, filters]);
+  }, [items, defferedFilters]);
 
   return (
     <FilterContext.Provider
       value={{
         filterResults,
         filters,
+        reset,
         updateCategory,
         updateRange,
         updateSearch,
-        reset,
       }}
     >
       {children}
