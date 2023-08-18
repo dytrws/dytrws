@@ -19,8 +19,8 @@ export function ExampleFinishedFilter() {
     <>
       <Tabs
         options={options}
-        active={activeFilter}
-        onUpdate={setActiveFilter}
+        activeId={activeFilter}
+        onChange={setActiveFilter}
       />
       {isLoading ? (
         <p>Loading...</p>

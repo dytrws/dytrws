@@ -1,21 +1,21 @@
 interface TabsProps {
   options: string[];
-  active: string;
-  onUpdate: (option: string) => void;
+  activeId: string;
+  onChange: (option: string) => void;
 }
 
-export function Tabs({ options, active, onUpdate }: TabsProps) {
+export function Tabs({ options, activeId, onChange }: TabsProps) {
   return (
     <div className="filter-navigation" role="tablist">
       {options.map((option) => (
         <button
           key={option}
           role="tab"
-          aria-selected={active === option}
+          aria-selected={activeId === option}
           className={`filter-navigation__button${
-            active === option ? " active" : ""
+            activeId === option ? " active" : ""
           }`}
-          onClick={() => onUpdate(option)}
+          onClick={() => onChange(option)}
         >
           {option}
         </button>

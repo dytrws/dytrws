@@ -1,23 +1,22 @@
 import { FilterReset } from "./FilterReset";
 import { useFilterContext } from "../hooks/useFilterContext";
 
+function formatSearchString(string: string, search: string) {
+  if (string && search) {
+    return string.replace(
+      new RegExp(search, "gi"),
+      (match) => `<span class="filter__highlights">${match}</span>`
+    );
+  }
+
+  return string;
+}
+
 export function FilterResults() {
+  console.log("FilterResults");
   const { reset } = useFilterContext();
   const { filters, filterResults: items } = useFilterContext();
   const search = filters.search.value;
-
-  function formatSearchString(string: string, search: string) {
-    if (string && search) {
-      return {
-        __html: string.replace(
-          new RegExp(search, "gi"),
-          (match) => `<span class="filter__highlights">${match}</span>`
-        ),
-      };
-    }
-
-    return { __html: string };
-  }
 
   return (
     <div className="filter__results">
@@ -42,10 +41,9 @@ export function FilterResults() {
                   <li
                     className="filter__result-item"
                     key={item.id}
-                    dangerouslySetInnerHTML={formatSearchString(
-                      item.name,
-                      search
-                    )}
+                    dangerouslySetInnerHTML={{
+                      __html: formatSearchString(item.name, search),
+                    }}
                   ></li>
                 );
               })}

@@ -20,8 +20,10 @@ export type Option = {
 
 export type CategoryFilters = { [key: string]: { options: Option[] } };
 
+export type Range = { min: number; max: number; value: number };
+
 export type RangeFilters = {
-  [key: string]: { min: number; max: number; value: number };
+  [key: string]: Range;
 };
 
 export type Filter = {
@@ -32,7 +34,10 @@ export type Filter = {
 
 export type FilterAction =
   | {
-      type: "RESET";
+      type: "SET_STATE";
+      payload: {
+        value: Filter;
+      };
     }
   | {
       type: "SET_SEARCH";

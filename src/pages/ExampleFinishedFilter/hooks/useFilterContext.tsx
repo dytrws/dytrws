@@ -81,12 +81,15 @@ function filterItems(items: Item[], filter: Filter) {
 
     filteredItems = items.filter((item) =>
       filter.categories[key].options.find((option) => {
+        if (!option.value) {
+          return false;
+        }
+
         const comparision = item.categories[key];
         if (Array.isArray(comparision)) {
-          return option.value && comparision.includes(option.id);
+          return comparision.includes(option.id);
         } else if (typeof comparision === "string") {
-          console.log(comparision, option.id);
-          return option.value && comparision === option.id;
+          return comparision === option.id;
         }
 
         return false;
