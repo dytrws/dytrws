@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { Fragment, useRef, useEffect, useState } from "react";
 import { pdfjs, Document, Page, Thumbnail } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
+import { usePageWidth } from "./hooks/usePageWidth";
 import "./Presentation.css";
 
 import type { PDFDocumentProxy } from "pdfjs-dist";
@@ -21,48 +22,61 @@ const trackWidth = 250;
 export function Presentation() {
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState<number>(0);
-  const [pageWidth, setPageWidth] = useState<number>(window.innerWidth);
   const [fullScreen, setFullScreen] = useState<boolean>(false);
+  const main = useRef<HTMLDivElement>(null);
+  const pageWidth = usePageWidth(16 / 9);
 
   useEffect(() => {
-    function handleResize() {
-      const maxWidth = (window.innerHeight + 100) * (16 / 9);
+    function scrollThumbsToNextSlide() {
+      if (pageNumber < numPages! - 1) {
+        setPageNumber((prev) => prev + 1);
 
-      if (window.innerWidth > maxWidth) {
-        setPageWidth(maxWidth);
-      } else {
-        setPageWidth(window.innerWidth);
+        // forgive me for not using refs here
+        document
+          .querySelector(`[data-pdf-thumbnail-number="${pageNumber + 1}"]`)
+          ?.scrollIntoView();
       }
     }
 
-    window.addEventListener("resize", handleResize);
+    function scrollThumbsToPreviousSlide() {
+      if (pageNumber > 0) {
+        setPageNumber((prev) => prev - 1);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+        // forgive me for not using refs here
+        document
+          .querySelector(`[data-pdf-thumbnail-number="${pageNumber - 1}"]`)
+          ?.scrollIntoView();
+      }
+    }
 
-  useEffect(() => {
     function handleKeyListener(event: KeyboardEvent) {
       if (
         event.key === "ArrowRight" ||
         event.key === " " ||
         event.key === "ArrowDown"
       ) {
-        if (pageNumber < numPages! - 1) {
-          setPageNumber((prev) => prev + 1);
-        }
+        scrollThumbsToNextSlide();
       } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        console.log(pageNumber);
-        if (pageNumber > 0) {
-          setPageNumber((prev) => prev - 1);
-        }
+        scrollThumbsToPreviousSlide();
       }
     }
+
+    // Mousehweel navigation: WIP
+    // function handleWheelListener(event: WheelEvent) {
+    //   const delta = Math.sign(event.deltaY);
+    //   if (delta > 0) {
+    //     scrollThumbsToNextSlide();
+    //   } else if (delta < 0) {
+    //     scrollThumbsToPreviousSlide();
+    //   }
+    // }
+    // const wheelListenerNode = main.current;
+    // wheelListenerNode?.addEventListener("wheel", handleWheelListener);
 
     window.addEventListener("keyup", handleKeyListener);
 
     return () => {
+      // wheelListenerNode?.removeEventListener("wheel", handleWheelListener);
       window.removeEventListener("keyup", handleKeyListener);
     };
   }, [pageNumber, numPages]);
@@ -88,22 +102,26 @@ export function Presentation() {
           className={`slideshow${fullScreen ? " slideshow--fullscreen" : ""}`}
         >
           <div className="slideshow__track">
-            {Array.from(new Array(numPages), (el, index) => (
-              <>
-                <div className="slideshow__item-number">{index + 1}</div>
+            {Array.from(new Array(numPages), (_, index) => (
+              <Fragment key={`page_${index + 1}`}>
+                <div
+                  className="slideshow__item-number"
+                  data-pdf-thumbnail-number={index}
+                >
+                  {index + 1}
+                </div>
                 <Thumbnail
                   width={trackWidth - 3}
                   className={`slideshow__track-item${
                     pageNumber === index ? " slideshow__track-item--active" : ""
                   }`}
                   onClick={() => setPageNumber(index)}
-                  key={`page_${index + 1}`}
                   pageNumber={index + 1}
                 />
-              </>
+              </Fragment>
             ))}
           </div>
-          <div className="slideshow__current">
+          <div ref={main} className="slideshow__current">
             <Page
               width={pageWidth - (fullScreen ? 42 : trackWidth + 70)}
               className="slideshow__current-item"
