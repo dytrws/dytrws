@@ -20,7 +20,7 @@
   {
     "id": 4,
     "name": "🍅 Tomato",
-    "categories": { "type": "vegetable", "taste": "umami" },
+    "categories": { "type": "vegetable", "taste": ["sweet", "umami"] },
     "ranges": { "price": 2 }
   },
   {
@@ -45,7 +45,7 @@
     "id": 8,
     "name": "🍑 Peach",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 5 }
+    "ranges": { "price": 3 }
   },
   {
     "id": 9,
@@ -57,54 +57,54 @@
     "id": 10,
     "name": "🥥 Coconut",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 6 }
+    "ranges": { "price": 4 }
   },
   {
     "id": 11,
     "name": "🍉 Watermelon",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 7 }
+    "ranges": { "price": 3 }
   },
   {
     "id": 12,
     "name": "🥝 Kiwi",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 7 }
+    "ranges": { "price": 5 }
   },
   {
     "id": 13,
     "name": "🍇 Grape",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 8 }
+    "ranges": { "price": 3 }
   },
   {
     "id": 14,
     "name": "🍈 Melon",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 9 }
+    "ranges": { "price": 4 }
   },
   {
     "id": 15,
     "name": "🍊 Orange",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 9 }
+    "ranges": { "price": 2 }
   },
   {
     "id": 16,
     "name": "🍐 Pear",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 10 }
+    "ranges": { "price": 1 }
   },
   {
     "id": 17,
     "name": "🥭 Mango",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 10 }
+    "ranges": { "price": 5 }
   },
   {
     "id": 18,
     "name": "🍌 Banana",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 11 }
+    "ranges": { "price": 3 }
   }
 ]

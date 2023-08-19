@@ -23,7 +23,7 @@ export function ExampleFilterWithCheckboxgroup() {
   // If no taste is selected, show all items
   const tasteFilterInactive = taste.every((item) => !item.value);
 
-  const filteredItems = items.filter((item) => {
+  const filterResults = items.filter((item) => {
     const typeMatch =
       typeFilterInactive ||
       type.some((typeItem) => {
@@ -62,7 +62,7 @@ export function ExampleFilterWithCheckboxgroup() {
         </li>
       </ul>
 
-      <FilterResults items={filteredItems} />
+      <FilterResults items={filterResults} />
     </>
   );
 }

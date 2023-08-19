@@ -20,7 +20,7 @@
   {
     "id": 4,
     "name": "🍅 Tomato",
-    "categories": { "type": "vegetable", "taste": "umami" },
+    "categories": { "type": "vegetable", "taste": ["sweet", "umami"] },
     "ranges": { "price": 2 }
   },
   {
@@ -63,7 +63,7 @@
     "id": 11,
     "name": "🍉 Watermelon",
     "categories": { "type": "fruit", "taste": "sweet" },
-    "ranges": { "price": 7 }
+    "ranges": { "price": 3 }
   },
   {
     "id": 12,
