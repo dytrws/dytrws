@@ -8,22 +8,22 @@ function createUrlFromId(id: string) {
   return `/data/${id}.json`;
 }
 
-const options = ["food", "animals", "sports"];
+const tabOptions = ["food", "animals", "sports"];
 
 export function ExampleFinishedFilter() {
-  const [activeFilter, setActiveFilter] = useState(options[0]);
+  const [activeFilter, setActiveFilter] = useState(tabOptions[0]);
   const url = createUrlFromId(activeFilter);
   const { isLoading, data } = useFetch<Item[]>(url);
 
   return (
     <>
       <Tabs
-        options={options}
+        tabs={tabOptions}
         activeId={activeFilter}
         onChange={setActiveFilter}
       />
       {isLoading ? (
-        <p>Loading...</p>
+        <p className="loading">Loading...</p>
       ) : (
         data && <Filter key={activeFilter} items={data} />
       )}

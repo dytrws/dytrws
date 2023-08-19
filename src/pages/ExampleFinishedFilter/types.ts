@@ -44,7 +44,7 @@ export type FilterAction =
     }
   | {
       type: "SET_CATEGORY";
-      payload: { id: string; optionid: string; value: boolean };
+      payload: { id: string; optionId: string; value: boolean };
     }
   | {
       type: "SET_RANGE";

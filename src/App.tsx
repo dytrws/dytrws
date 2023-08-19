@@ -1,5 +1,5 @@
-import "./App.css";
-import { NavLink, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
+import { NavBar } from "./components/NavBar.tsx";
 import { ExampleTabs } from "./pages/Tabs/ExampleTabs.tsx";
 import { ExampleJSX } from "./pages/JSX/ExampleJSX.tsx";
 import { ExampleCheckboxgroup } from "./pages/ExampleCheckboxgroup/ExampleCheckboxgroup.tsx";
@@ -9,64 +9,12 @@ import { ExampleFilterResults } from "./pages/ExampleFilterResults/ExampleFilter
 import { ExampleFinishedFilter } from "./pages/ExampleFinishedFilter/ExampleFinishedFilter.tsx";
 import { ComingSoon } from "./pages/ComingSoon/ComingSoon.tsx";
 // import { Home } from "./pages/Home/Home.tsx";
+import "./App.css";
 
-export default function App() {
+export function App() {
   return (
     <>
-      <div className="navbar">
-        <div className="spacer navbar__items">
-          <details className="chapters">
-            <summary>Select a chapter</summary>
-            <ul>
-              <li>
-                <NavLink to="/examples/jsx">
-                  🔧 Building the static HTML
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/examples/filterlist">
-                  🔧 Building the filter list
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/examples/tabs">
-                  🔧 Building the Tabs element
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/examples/filterwithtabs">
-                  🔗 Connecting the tabs element with the filterresults
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/examples/checkboxgroup">
-                  🔧 Building the CheckboxGroup element
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/examples/filterwithcheckboxgroup">
-                  🔗 Connecting Checkboxgroup with filter
-                </NavLink>
-              </li>
-              <li>
-                <NavLink to="/examples/finishedfilter">
-                  ✨ Final product
-                </NavLink>
-              </li>
-            </ul>
-          </details>
-          <div>
-            <a
-              className="github"
-              href="https://github.com/dytrws/dytrws"
-              title="GitHub"
-              target="_blank"
-            >
-              <img src="github.svg" />
-            </a>
-          </div>
-        </div>
-      </div>
+      <NavBar />
       <div className="spacer">
         <Routes>
           <Route path="/" element={<ExampleFinishedFilter />} />

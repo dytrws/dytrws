@@ -38,7 +38,7 @@ export function useFilter(initialState: Filter) {
           // };
           const optionElement = state.categories[
             action.payload.id
-          ].options.find((element) => element.id === action.payload.optionid);
+          ].options.find((element) => element.id === action.payload.optionId);
 
           if (optionElement) {
             optionElement.value = action.payload.value;
@@ -79,10 +79,10 @@ export function useFilter(initialState: Filter) {
   }, []);
 
   const updateCategory = useCallback(
-    (id: string, optionid: string, value: boolean) => {
+    (id: string, optionId: string, value: boolean) => {
       dispatchFilters({
         type: "SET_CATEGORY",
-        payload: { id, optionid, value },
+        payload: { id, optionId, value },
       });
     },
     []

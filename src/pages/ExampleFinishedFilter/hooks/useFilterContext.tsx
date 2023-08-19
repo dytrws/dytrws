@@ -76,26 +76,29 @@ function filterItems(items: Item[], filter: Filter) {
     );
   }
 
-  for (const key in filter.categories) {
+  for (const categoryId in filter.categories) {
     if (filteredItems.length === 0) {
       return filteredItems;
     }
 
-    if (filter.categories[key].options.every((option) => !option.value)) {
+    const category = filter.categories[categoryId];
+
+    if (category.options.every((option) => !option.value)) {
       continue;
     }
 
     filteredItems = items.filter((item) =>
-      filter.categories[key].options.find((option) => {
+      category.options.find((option) => {
         if (!option.value) {
           return false;
         }
 
-        const comparision = item.categories[key];
-        if (Array.isArray(comparision)) {
-          return comparision.includes(option.id);
-        } else if (typeof comparision === "string") {
-          return comparision === option.id;
+        const itemCategory = item.categories[categoryId];
+
+        if (Array.isArray(itemCategory)) {
+          return itemCategory.includes(option.id);
+        } else if (typeof itemCategory === "string") {
+          return itemCategory === option.id;
         }
 
         return false;
@@ -103,13 +106,13 @@ function filterItems(items: Item[], filter: Filter) {
     );
   }
 
-  for (const key in filter.ranges) {
+  for (const rangeKey in filter.ranges) {
     if (filteredItems.length === 0) {
       return filteredItems;
     }
 
     filteredItems = filteredItems.filter((item) => {
-      return item.ranges[key] <= filter.ranges[key].value;
+      return item.ranges[rangeKey] <= filter.ranges[rangeKey].value;
     });
   }
 
@@ -117,16 +120,16 @@ function filterItems(items: Item[], filter: Filter) {
 }
 
 function extractFilterOptionsFromItems(items: Item[]) {
-  const search: SearchFilter = { value: "" };
-  const categories: CategoryFilters = {};
-  const ranges: RangeFilters = {};
+  const searchFilter: SearchFilter = { value: "" };
+  const categoryFilters: CategoryFilters = {};
+  const rangeFilters: RangeFilters = {};
 
   function handleCategory(
     categoryId: string,
     categoryValue: string | string[]
   ) {
-    if (!(categoryId in categories)) {
-      categories[categoryId] = {
+    if (!(categoryId in categoryFilters)) {
+      categoryFilters[categoryId] = {
         options: [],
       };
     }
@@ -142,9 +145,11 @@ function extractFilterOptionsFromItems(items: Item[]) {
 
   function handleOption(categoryId: string, optionId: string) {
     if (
-      !categories[categoryId].options.some((option) => option.id === optionId)
+      !categoryFilters[categoryId].options.some(
+        (option) => option.id === optionId
+      )
     ) {
-      categories[categoryId].options.push({
+      categoryFilters[categoryId].options.push({
         id: optionId,
         value: false,
       });
@@ -152,17 +157,17 @@ function extractFilterOptionsFromItems(items: Item[]) {
   }
 
   function handleRange(rangeId: string, rangeValue: number) {
-    if (!(rangeId in ranges)) {
-      ranges[rangeId] = { min: 0, max: 0, value: 0 };
+    if (!(rangeId in rangeFilters)) {
+      rangeFilters[rangeId] = { min: 0, max: 0, value: 0 };
     }
 
-    if (rangeValue < ranges[rangeId].min) {
-      ranges[rangeId].min = rangeValue;
+    if (rangeValue < rangeFilters[rangeId].min) {
+      rangeFilters[rangeId].min = rangeValue;
     }
 
-    if (rangeValue > ranges[rangeId].max) {
-      ranges[rangeId].max = rangeValue;
-      ranges[rangeId].value = rangeValue;
+    if (rangeValue > rangeFilters[rangeId].max) {
+      rangeFilters[rangeId].max = rangeValue;
+      rangeFilters[rangeId].value = rangeValue;
     }
   }
 
@@ -171,14 +176,14 @@ function extractFilterOptionsFromItems(items: Item[]) {
       handleCategory(categoryId, item.categories[categoryId]);
     }
 
-    for (const rangekey in item.ranges) {
-      handleRange(rangekey, item.ranges[rangekey]);
+    for (const rangeId in item.ranges) {
+      handleRange(rangeId, item.ranges[rangeId]);
     }
   }
 
   return {
-    search,
-    categories,
-    ranges,
+    search: searchFilter,
+    categories: categoryFilters,
+    ranges: rangeFilters,
   };
 }

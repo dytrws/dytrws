@@ -15,6 +15,7 @@ export function useFetch<DataType>(url: string) {
         setData(data);
       } catch (error) {
         // catches the abort signal, can be expanded to handle other errors
+        // console.log(error);
       } finally {
         setIsLoading(false);
       }

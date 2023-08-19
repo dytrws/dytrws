@@ -4,6 +4,7 @@
   --color-background: #04223c;
   --color-background-dark: #021323;
   --color-text: #fff;
+  --color-offtext: #dddddd;
   accent-color: #c00020;
 }
 
@@ -39,7 +40,7 @@ pre {
 .filter-navigation {
   display: flex;
   gap: 2rem;
-  border-bottom: 1px solid var(--color-soft-light);
+  border-block-end: 1px solid var(--color-soft-light);
   padding-inline: 2rem;
   padding-block: 1rem;
 }
@@ -80,12 +81,12 @@ pre {
 .filter__result-item {
   font-size: 1.5rem;
   padding: 1rem;
-  border-bottom: 1px solid var(--color-soft-light);
+  border-block-end: 1px solid var(--color-soft-light);
 }
 
 .filter__settings {
   padding: 3rem;
-  border-right: 1px solid var(--color-soft-light);
+  border-inline-end: 1px solid var(--color-soft-light);
 }
 
 .filter__settings-header-container {
@@ -127,7 +128,7 @@ pre {
 }
 
 .filter__results h1 {
-  margin-top: 0;
+  margin-block-start: 0;
 }
 
 input[type="checkbox"] + label {
@@ -166,23 +167,32 @@ input[type="checkbox"] + label {
 
 .chapters summary {
   font-weight: bold;
+  cursor: pointer;
 }
 
 .chapters ul {
   position: absolute;
   top: 100%;
   background-color: var(--color-background-dark);
-  color: #fff;
+  color: var(--color-text);
   padding: 0;
   margin: 0;
   border-radius: 6px;
   list-style: none;
   overflow: hidden;
   width: 30rem;
+  counter-reset: index;
 }
 
 .chapters ul li + li {
-  border-top: 1px solid var(--color-soft-lighter);
+  border-block-start: 1px solid var(--color-soft-lighter);
+}
+
+.chapters ul li + li a::before {
+  color: var(--color-offtext);
+  counter-increment: index; /* Increment the value of section counter by 1 */
+  content: counter(index) "."; /* Display counter value in default style (decimal) */
+  margin-inline-end: 1em;
 }
 
 .chapters ul li a {
@@ -194,5 +204,21 @@ input[type="checkbox"] + label {
 
 .chapters ul li a:hover,
 .chapters ul li a:focus {
-  background-color: #ffffff26;
+  background-color: var(--color-soft-light);
+}
+
+.loading {
+  animation: show 0.5s ease;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+  opacity: 0;
+}
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
