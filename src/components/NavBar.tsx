@@ -1,5 +1,6 @@
 import { Details } from "./Details";
 import { NavLink } from "react-router-dom";
+import "./NavBar.css";
 
 export function NavBar() {
   return (
@@ -42,14 +43,16 @@ export function NavBar() {
             </li>
           </ul>
         </Details>
+        <div className="navbar__links">
+          <NavLink to="/slides">📄 Slides</NavLink>
+        </div>
         <div>
           <a
             className="github"
             href="https://github.com/dytrws/dytrws"
-            title="GitHub"
             target="_blank"
           >
-            <img src="/github.svg" />
+            <img src="/github.svg" /> Source code @ GitHub
           </a>
         </div>
       </div>

@@ -1,0 +1,97 @@
+.filter-navigation {
+  display: flex;
+  gap: 2rem;
+  border-block-end: 1px solid var(--color-soft-light);
+  padding-inline: 2rem;
+  padding-block: 1rem;
+}
+
+.filter-navigation__button {
+  border: none;
+  background: none;
+  font-size: 1.3rem;
+  color: var(--color-text);
+  padding: 1rem;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.filter-navigation__button.active,
+.filter-navigation__button:hover,
+.filter-navigation__button:focus {
+  background-color: var(--color-soft-light);
+}
+
+.filter {
+  display: flex;
+}
+
+.filter ul,
+.filter__results ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.filter__highlights {
+  background-color: var(--color-soft-lighter);
+  border-radius: 3px;
+}
+
+.filter__result-item {
+  font-size: 1.5rem;
+  padding: 1rem;
+  border-block-end: 1px solid var(--color-soft-light);
+}
+
+.filter__settings {
+  padding: 3rem;
+  border-inline-end: 1px solid var(--color-soft-light);
+}
+
+.filter__settings-header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: 2rem;
+}
+
+.filter__reset {
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-soft-light);
+  border-radius: 3px;
+  padding: 0.2em 0.5em;
+  cursor: pointer;
+}
+
+.filter__reset:hover,
+.filter__reset:focus {
+  background-color: var(--color-soft-light);
+}
+
+.filter__settings input {
+  background: transparent;
+  border: 2px solid var(--color-text);
+  color: var(--color-text);
+  padding: 0.4rem 0.7rem;
+  border-radius: 5px;
+}
+
+.filter__settings h2 {
+  margin: 0;
+}
+
+.filter__results {
+  padding: 3rem;
+  width: 100%;
+}
+
+.filter__results h1 {
+  margin-block-start: 0;
+}
+
+input[type="checkbox"] + label {
+  margin-inline-start: 0.5em;
+}
