@@ -13,7 +13,6 @@ function formatSearchString(string: string, search: string) {
 }
 
 export function FilterResults() {
-  console.log("FilterResults");
   const { reset } = useFilterContext();
   const { filters, filterResults: items } = useFilterContext();
   const search = filters.search.value;

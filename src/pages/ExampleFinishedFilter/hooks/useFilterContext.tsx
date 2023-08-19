@@ -1,4 +1,4 @@
-import { createContext, useContext, useDeferredValue, useMemo } from "react";
+import { createContext, useContext, useMemo } from "react";
 import { useFilter } from "./useFilter";
 import {
   Item,
@@ -23,15 +23,21 @@ export function FilterContextProvider({
   children,
   items,
 }: FilterContextProviderProps) {
-  const filterOptions = extractFilterOptionsFromItems(items);
-  const { filters, updateCategory, updateRange, updateSearch, reset } =
-    useFilter(filterOptions);
+  const initialFilterOptions = useMemo(
+    () => extractFilterOptionsFromItems(items),
+    [items]
+  );
 
-  // performance optimiziations for huge item lists
-  const defferedFilters = useDeferredValue(filters);
+  const { filters, updateCategory, updateRange, updateSearch, reset } =
+    useFilter(initialFilterOptions);
+
+  // potential performance optimiziations for huge lists of items.
+  // comes at the cost of a second re-render:
+  // const defferedFilters = useDeferredValue(filters);
+
   const filterResults = useMemo(() => {
     return filterItems(items, filters);
-  }, [items, defferedFilters]);
+  }, [items, filters]);
 
   return (
     <FilterContext.Provider

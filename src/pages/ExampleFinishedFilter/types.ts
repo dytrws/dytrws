@@ -34,10 +34,7 @@ export type Filter = {
 
 export type FilterAction =
   | {
-      type: "SET_STATE";
-      payload: {
-        value: Filter;
-      };
+      type: "RESET";
     }
   | {
       type: "SET_SEARCH";
