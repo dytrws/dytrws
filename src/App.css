@@ -43,3 +43,9 @@ pre {
   padding-inline: 2rem;
   margin: 0 auto;
 }
+
+@media (max-width: 800px) {
+  .spacer {
+    padding-inline: 0.5rem;
+  }
+}

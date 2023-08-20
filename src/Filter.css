@@ -95,3 +95,14 @@
 input[type="checkbox"] + label {
   margin-inline-start: 0.5em;
 }
+
+@media (max-width: 800px) {
+  .filter {
+    flex-direction: column;
+  }
+
+  .filter__settings {
+    border-inline-end: none;
+    border-block-end: 1px solid var(--color-soft-light);
+  }
+}
