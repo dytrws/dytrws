@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar.tsx";
-import { Presentation } from "./pages/Presentation/Presentation.tsx";
+import { Slides } from "./pages/Slides/Slides.tsx";
 import { BuildingStaticHTML } from "./pages/examples/BuildingStaticHTML/BuildingStaticHTML.tsx";
 import { SplittingIntoComponents } from "./pages/examples/SplittingIntoComponents/SplittingIntoComponents.tsx";
 import { ComponentConfiguration } from "./pages/examples/ComponentConfiguration/ComponentConfiguration.tsx";
@@ -21,7 +21,7 @@ export function App() {
       <NavBar />
 
       <Routes>
-        <Route path="/slides/" element={<Presentation />} />
+        <Route path="/slides/" element={<Slides />} />
 
         <Route
           path="/examples/buildingstatichtml/"

@@ -3,7 +3,7 @@ import { pdfjs, Document, Page, Thumbnail } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 import { usePageWidth } from "./hooks/usePageWidth";
-import "./Presentation.css";
+import "./Slides.css";
 
 import type { PDFDocumentProxy } from "pdfjs-dist";
 
@@ -19,7 +19,7 @@ const options = {
 
 const trackWidth = 250;
 
-export function Presentation() {
+export function Slides() {
   const [numPages, setNumPages] = useState<number>();
   const [pageNumber, setPageNumber] = useState<number>(0);
   const [fullScreen, setFullScreen] = useState<boolean>(false);
@@ -94,7 +94,7 @@ export function Presentation() {
         onClick={() => setFullScreen((value) => !value)}
       ></button>
       <Document
-        file="presentation.pdf"
+        file="slides.pdf"
         onLoadSuccess={onDocumentLoadSuccess}
         options={options}
       >
