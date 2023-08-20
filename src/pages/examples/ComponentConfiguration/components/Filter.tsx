@@ -1,6 +1,6 @@
 import { FilterSettings } from "./FilterSettings";
 import { FilterResults } from "./FilterResults";
-import items from "../../../data/food.json";
+import items from "../../../../data/food.json";
 
 export function Filter() {
   return (

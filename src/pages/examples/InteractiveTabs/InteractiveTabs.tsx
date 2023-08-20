@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Tabs } from "./components/Tabs";
 
-export function ExampleTabs() {
+export function InteractiveTabs() {
   const options = ["food", "animals", "sports"];
   const [activeFilter, setActiveFilter] = useState(options[0]);
 

@@ -1,8 +1,8 @@
 import { Details } from "./Details";
 import { NavLink } from "react-router-dom";
+import { MarkupComponent } from "./MarkupComponent";
 import "./NavBar.css";
 
-// react is a library that has many community created packages and tools
 export function NavBar() {
   return (
     <div className="navbar">
@@ -10,21 +10,23 @@ export function NavBar() {
         <Details summary="Code examples">
           <ul>
             <li>
-              <NavLink to="/examples/finishedfilter">
+              <NavLink to="/examples/finalproduct">
                 ✨ Final product (end goal)
               </NavLink>
             </li>
             <li>
-              <NavLink to="/examples/jsx">🔧 Building the static HTML</NavLink>
-            </li>
-            <li>
-              <NavLink to="/examples/componentsstatic">
-                🔧 Splitting up into components
+              <NavLink to="/examples/buildingstatichtml">
+                🔧 Building static HTML
               </NavLink>
             </li>
             <li>
-              <NavLink to="/examples/componentsdynamic">
-                🔧 Component configuration with props
+              <NavLink to="/examples/splittingintocomponents">
+                🔧 Splitting into components
+              </NavLink>
+            </li>
+            <li>
+              <NavLink to="/examples/componentconfiguration">
+                🔧 Component configuration (properties)
               </NavLink>
             </li>
             {/* <li>
@@ -33,35 +35,39 @@ export function NavBar() {
               </NavLink>
             </li> */}
             <li>
-              <NavLink to="/examples/tabs">
-                🔧 Building the &lt;Tabs&gt; element
+              <NavLink to="/examples/interactivetabs">
+                🔧 Interactive <MarkupComponent>Tabs</MarkupComponent>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/examples/filterwithtabs">
-                🔗 Connecting &lt;Tabs&gt; the &lt;FilterResults&gt;
+              <NavLink to="/examples/tabswithfilterresults">
+                🔗 Connecting <MarkupComponent>Tabs</MarkupComponent> with{" "}
+                <MarkupComponent>FilterResults</MarkupComponent>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/examples/checkboxgroup">
-                🔧 Building the &lt;Checkboxgroup&gt; element
+              <NavLink to="/examples/interactivecheckboxgroup">
+                🔧 Interactive <MarkupComponent>Checkboxgroup</MarkupComponent>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/examples/filterwithcheckboxgroup">
-                🔗 Connecting &lt;Checkboxgroup&gt; with &lt;FilterResults&gt;
+              <NavLink to="/examples/checkboxgroupwithfilterresults">
+                🔗 Connecting <MarkupComponent>Checkboxgroup</MarkupComponent>{" "}
+                with <MarkupComponent>FilterResults</MarkupComponent>
+              </NavLink>
+            </li>
+            {/* <li>
+              <NavLink to="/examples/interactivetextsearch">
+                🔧 Interactive <MarkupComponent>TextSearch</MarkupComponent>
               </NavLink>
             </li>
             <li>
-              <NavLink to="/examples/checkboxgroup">
-                🔧 Building the &lt;TextSearch&gt; element
+              <NavLink to="/examples/textsearchwithfilterresults">
+                🔗 Connecting <MarkupComponent>TextSearch</MarkupComponent> with{" "}
+                <MarkupComponent>FilterResults</MarkupComponent>
               </NavLink>
-            </li>
-            <li>
-              <NavLink to="/examples/filterwithcheckboxgroup">
-                🔗 Connecting &lt;TextSearch&gt; with &lt;FilterResults&gt;
-              </NavLink>
-            </li>
+            </li> */}
+            {/* <li>🚧 WIP: more examples coming soon</li> */}
           </ul>
         </Details>
         <div className="navbar__links">

@@ -10,7 +10,7 @@ function createUrlFromId(id: string) {
 
 const tabOptions = ["food", "animals", "sports"];
 
-export function ExampleFinishedFilter() {
+export function FinalProduct() {
   const [activeFilter, setActiveFilter] = useState(tabOptions[0]);
   const url = createUrlFromId(activeFilter);
   const { isLoading, data } = useFetch<Item[]>(url);

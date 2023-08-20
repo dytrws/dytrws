@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Checkboxgroup } from "./components/Checkboxgroup";
 
-export function ExampleCheckboxgroup() {
+export function InteractiveCheckboxgroup() {
   const [type, setType] = useState([
     { id: "fruit", value: false },
     { id: "vegetable", value: false },

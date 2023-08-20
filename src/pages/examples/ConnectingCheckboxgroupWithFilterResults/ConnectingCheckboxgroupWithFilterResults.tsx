@@ -1,13 +1,12 @@
 import { useState } from "react";
 import { Checkboxgroup } from "./components/Checkboxgroup";
-import items from "../../data/food.json";
+import items from "../../../data/food.json";
 import { FilterResults } from "./components/FilterResults";
 
-export function ExampleFilterWithCheckboxgroup() {
+export function ConnectingCheckboxgroupWithFilterResults() {
   const [type, setType] = useState([
     { id: "fruit", value: false },
     { id: "vegetable", value: false },
-    { id: "root", value: false },
   ]);
 
   const [taste, setTaste] = useState([

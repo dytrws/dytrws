@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Tabs } from "./components/Tabs";
-import food from "../../data/food.json";
-import sports from "../../data/sports.json";
-import animals from "../../data/animals.json";
+import food from "../../../data/food.json";
+import sports from "../../../data/sports.json";
+import animals from "../../../data/animals.json";
 import { FilterResults } from "./components/FilterResults";
 
 const items: { [x: string]: any } = {
@@ -11,7 +11,7 @@ const items: { [x: string]: any } = {
   animals,
 };
 
-export function ExampleFilterWithTabs() {
+export function ConnectingTabsWithFilterResults() {
   const options = ["food", "animals", "sports"];
   const [activeTab, setActiveTab] = useState(options[0]);
 

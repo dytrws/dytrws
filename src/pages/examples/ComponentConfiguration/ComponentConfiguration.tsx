@@ -1,10 +1,10 @@
 import { Tabs } from "./components/Tabs";
 import { Filter } from "./components/Filter";
 
-export function ExampleComponentsStatic() {
+export function ComponentConfiguration() {
   return (
     <>
-      <Tabs />
+      <Tabs tabs={["food", "animals", "sports"]} selectedId="food" />
       <Filter />
     </>
   );

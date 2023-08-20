@@ -13,9 +13,10 @@
 
 // next steps:
 // split up the JSX into components
+// make the components configurable with properties
 // add interactivity
 
-export function ExampleJSX() {
+export function BuildingStaticHTML() {
   return (
     <>
       <div className="filter-navigation" role="tablist">

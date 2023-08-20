@@ -91,3 +91,19 @@
     opacity: 1;
   }
 }
+
+.markup-component {
+  color: #36f9f6;
+}
+
+.markup-component::before,
+.markup-component::after {
+}
+
+.markup-component::before {
+  content: "<";
+}
+
+.markup-component::after {
+  content: ">";
+}

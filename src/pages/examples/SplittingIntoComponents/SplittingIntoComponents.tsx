@@ -1,10 +1,10 @@
 import { Tabs } from "./components/Tabs";
 import { Filter } from "./components/Filter";
 
-export function ExampleComponentsDynamic() {
+export function SplittingIntoComponents() {
   return (
     <>
-      <Tabs tabs={["food", "animals", "sports"]} selectedId="food" />
+      <Tabs />
       <Filter />
     </>
   );

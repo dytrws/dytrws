@@ -1,17 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 import { NavBar } from "./components/NavBar.tsx";
 import { Presentation } from "./pages/Presentation/Presentation.tsx";
-import { ExampleTabs } from "./pages/ExampleTabs/ExampleTabs.tsx";
-import { ExampleJSX } from "./pages/ExampleJSX/ExampleJSX.tsx";
-import { ExampleComponentsStatic } from "./pages/ExampleComponentsStatic/ExampleComponentsStatic.tsx";
-import { ExampleComponentsDynamic } from "./pages/ExampleComponentsDynamic/ExampleComponentsDynamic.tsx";
-import { ExampleCheckboxgroup } from "./pages/ExampleCheckboxgroup/ExampleCheckboxgroup.tsx";
-import { ExampleFilterWithCheckboxgroup } from "./pages/ExampleFilterWithCheckboxgroup/ExampleFilterWithCheckboxgroup.tsx";
-import { ExampleFilterWithTabs } from "./pages/ExampleFilterWithTabs/ExampleFilterWithTabs.tsx";
-import { ExampleFilterResults } from "./pages/ExampleFilterResults/ExampleFilterResults.tsx";
-import { ExampleFinishedFilter } from "./pages/ExampleFinishedFilter/ExampleFinishedFilter.tsx";
-import { ComingSoon } from "./pages/ComingSoon/ComingSoon.tsx";
-// import { Home } from "./pages/Home/Home.tsx";
+import { BuildingStaticHTML } from "./pages/examples/BuildingStaticHTML/BuildingStaticHTML.tsx";
+import { SplittingIntoComponents } from "./pages/examples/SplittingIntoComponents/SplittingIntoComponents.tsx";
+import { ComponentConfiguration } from "./pages/examples/ComponentConfiguration/ComponentConfiguration.tsx";
+import { InteractiveTabs } from "./pages/examples/InteractiveTabs/InteractiveTabs.tsx";
+import { InteractiveCheckboxgroup } from "./pages/examples/InteractiveCheckboxgroup/InteractiveCheckboxgroup.tsx";
+import { ConnectingTabsWithFilterResults } from "./pages/examples/ConnectingTabsWithFilterResults/ConnectingTabsWithFilterResults.tsx";
+import { ConnectingCheckboxgroupWithFilterResults } from "./pages/examples/ConnectingCheckboxgroupWithFilterResults/ConnectingCheckboxgroupWithFilterResults.tsx";
+import { BuildingFilterResults } from "./pages/examples/BuildingFilterResults/BuildingFilterResults.tsx";
+import { FinalProduct } from "./pages/examples/FinalProduct/FinalProduct.tsx";
+
+// import { Home } from "./pages/examples/Home/Home.tsx";
 import "./App.css";
 import "./Filter.css";
 
@@ -24,71 +24,70 @@ export function App() {
         <Route path="/slides/" element={<Presentation />} />
 
         <Route
-          path="/examples/jsx/"
+          path="/examples/buildingstatichtml/"
           element={
             <div className="spacer">
-              <ExampleJSX />
+              <BuildingStaticHTML />
             </div>
           }
         />
         <Route
-          path="/examples/componentsstatic/"
+          path="/examples/splittingintocomponents/"
           element={
             <div className="spacer">
-              <ExampleComponentsStatic />
+              <SplittingIntoComponents />
             </div>
           }
         />
         <Route
-          path="/examples/componentsdynamic/"
+          path="/examples/componentconfiguration/"
           element={
             <div className="spacer">
-              <ExampleComponentsDynamic />
+              <ComponentConfiguration />
             </div>
           }
         />
         <Route
-          path="/examples/filterlist/"
+          path="/examples/filterresults/"
           element={
             <div className="spacer">
-              <ExampleFilterResults />
+              <BuildingFilterResults />
             </div>
           }
         />
         <Route
-          path="/examples/tabs/"
+          path="/examples/interactivetabs/"
           element={
             <div className="spacer">
-              <ExampleTabs />
+              <InteractiveTabs />
             </div>
           }
         />
         <Route
-          path="/examples/filterwithtabs/"
+          path="/examples/tabswithfilterresults/"
           element={
             <div className="spacer">
-              <ExampleFilterWithTabs />
+              <ConnectingTabsWithFilterResults />
             </div>
           }
         />
         <Route
-          path="/examples/checkboxgroup/"
+          path="/examples/interactivecheckboxgroup/"
           element={
             <div className="spacer">
-              <ExampleCheckboxgroup />
+              <InteractiveCheckboxgroup />
             </div>
           }
         />
         <Route
-          path="/examples/filterwithcheckboxgroup/"
-          element={<ExampleFilterWithCheckboxgroup />}
+          path="/examples/checkboxgroupwithfilterresults/"
+          element={<ConnectingCheckboxgroupWithFilterResults />}
         />
-        <Route path="/examples/comingsoon/" element={<ComingSoon />} />
         <Route
-          path="/examples/finishedfilter/"
+          path="/examples/finalproduct/"
           element={
             <div className="spacer">
-              <ExampleFinishedFilter />
+              <FinalProduct />
             </div>
           }
         />
@@ -96,7 +95,7 @@ export function App() {
           path="/"
           element={
             <div className="spacer">
-              <ExampleFinishedFilter />
+              <FinalProduct />
             </div>
           }
         />
@@ -104,7 +103,7 @@ export function App() {
           path="*"
           element={
             <div className="spacer">
-              <ExampleFinishedFilter />
+              <FinalProduct />
             </div>
           }
         />
