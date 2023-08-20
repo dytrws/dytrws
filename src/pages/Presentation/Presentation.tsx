@@ -94,7 +94,7 @@ export function Presentation() {
         onClick={() => setFullScreen((value) => !value)}
       ></button>
       <Document
-        file="data/presentation.pdf"
+        file="presentation.pdf"
         onLoadSuccess={onDocumentLoadSuccess}
         options={options}
       >

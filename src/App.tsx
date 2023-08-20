@@ -3,6 +3,8 @@ import { NavBar } from "./components/NavBar.tsx";
 import { Presentation } from "./pages/Presentation/Presentation.tsx";
 import { ExampleTabs } from "./pages/ExampleTabs/ExampleTabs.tsx";
 import { ExampleJSX } from "./pages/ExampleJSX/ExampleJSX.tsx";
+import { ExampleComponentsStatic } from "./pages/ExampleComponentsStatic/ExampleComponentsStatic.tsx";
+import { ExampleComponentsDynamic } from "./pages/ExampleComponentsDynamic/ExampleComponentsDynamic.tsx";
 import { ExampleCheckboxgroup } from "./pages/ExampleCheckboxgroup/ExampleCheckboxgroup.tsx";
 import { ExampleFilterWithCheckboxgroup } from "./pages/ExampleFilterWithCheckboxgroup/ExampleFilterWithCheckboxgroup.tsx";
 import { ExampleFilterWithTabs } from "./pages/ExampleFilterWithTabs/ExampleFilterWithTabs.tsx";
@@ -26,6 +28,22 @@ export function App() {
           element={
             <div className="spacer">
               <ExampleJSX />
+            </div>
+          }
+        />
+        <Route
+          path="/examples/componentsstatic/"
+          element={
+            <div className="spacer">
+              <ExampleComponentsStatic />
+            </div>
+          }
+        />
+        <Route
+          path="/examples/componentsdynamic/"
+          element={
+            <div className="spacer">
+              <ExampleComponentsDynamic />
             </div>
           }
         />

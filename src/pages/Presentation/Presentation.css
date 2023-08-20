@@ -18,10 +18,15 @@
 }
 
 .slideshow__track-item {
+  background-color: var(--color-dark) !important;
   display: block;
   animation: show 0.2s ease;
   outline: 4px solid transparent;
   transition: outline-color 0.4s ease;
+}
+
+.slideshow__track-item > div {
+  background-color: var(--color-dark) !important;
 }
 
 .slideshow__item-number {
