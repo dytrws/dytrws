@@ -100,8 +100,8 @@
   background-repeat: no-repeat;
 }
 
-body:has(> .slideshow--fullscreen) {
-  background-color: var(--color-dark);
+body:has(.slideshow) {
+  background-color: var(--color-dark) !important;
 }
 
 .fullscreen--active {

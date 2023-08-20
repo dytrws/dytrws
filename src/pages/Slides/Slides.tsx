@@ -1,11 +1,12 @@
-import { Fragment, useRef, useEffect, useState } from "react";
+import { useRef, useCallback, useState } from "react";
 import { pdfjs, Document, Page, Thumbnail } from "react-pdf";
 import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
-import { usePageWidth } from "./hooks/usePageWidth";
-import "./Slides.css";
-
 import type { PDFDocumentProxy } from "pdfjs-dist";
+import { usePageWidth } from "./hooks/usePageWidth";
+import { useUserInteraction } from "./hooks/useUserInteraction";
+
+import "./Slides.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   "pdfjs-dist/build/pdf.worker.min.js",
@@ -25,61 +26,41 @@ export function Slides() {
   const [fullScreen, setFullScreen] = useState<boolean>(false);
   const main = useRef<HTMLDivElement>(null);
   const pageWidth = usePageWidth(16 / 9);
+  const itemsRef = useRef<Map<number, HTMLDivElement>>(
+    new Map<number, HTMLDivElement>()
+  );
 
-  useEffect(() => {
-    function scrollThumbsToNextSlide() {
-      if (pageNumber < numPages! - 1) {
-        setPageNumber((prev) => prev + 1);
+  const scrollToId = useCallback((itemId: number) => {
+    const node = itemsRef.current.get(itemId);
+    node?.scrollIntoView({
+      // behavior: "smooth",
+      block: "nearest",
+      inline: "center",
+    });
+  }, []);
 
-        // forgive me for not using refs here
-        document
-          .querySelector(`[data-pdf-thumbnail-number="${pageNumber + 1}"]`)
-          ?.scrollIntoView();
-      }
+  // Future TODO: these callbacks will benefit from the upcoming useEffectEvent hook
+  const scrollThumbsToNextSlide = useCallback(() => {
+    const newPageNumber = pageNumber + 1;
+    if (numPages && newPageNumber < numPages) {
+      setPageNumber(newPageNumber);
+      scrollToId(newPageNumber);
     }
+  }, [pageNumber, numPages, scrollToId]);
 
-    function scrollThumbsToPreviousSlide() {
-      if (pageNumber > 0) {
-        setPageNumber((prev) => prev - 1);
-
-        // forgive me for not using refs here
-        document
-          .querySelector(`[data-pdf-thumbnail-number="${pageNumber - 1}"]`)
-          ?.scrollIntoView();
-      }
+  const scrollThumbsToPreviousSlide = useCallback(() => {
+    const newPageNumber = pageNumber - 1;
+    if (newPageNumber >= 0) {
+      setPageNumber(newPageNumber);
+      scrollToId(newPageNumber);
     }
+  }, [pageNumber, scrollToId]);
 
-    function handleKeyListener(event: KeyboardEvent) {
-      if (
-        event.key === "ArrowRight" ||
-        event.key === " " ||
-        event.key === "ArrowDown"
-      ) {
-        scrollThumbsToNextSlide();
-      } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
-        scrollThumbsToPreviousSlide();
-      }
-    }
-
-    // Mousehweel navigation: WIP
-    // function handleWheelListener(event: WheelEvent) {
-    //   const delta = Math.sign(event.deltaY);
-    //   if (delta > 0) {
-    //     scrollThumbsToNextSlide();
-    //   } else if (delta < 0) {
-    //     scrollThumbsToPreviousSlide();
-    //   }
-    // }
-    // const wheelListenerNode = main.current;
-    // wheelListenerNode?.addEventListener("wheel", handleWheelListener);
-
-    window.addEventListener("keyup", handleKeyListener);
-
-    return () => {
-      // wheelListenerNode?.removeEventListener("wheel", handleWheelListener);
-      window.removeEventListener("keyup", handleKeyListener);
-    };
-  }, [pageNumber, numPages]);
+  useUserInteraction({
+    onNext: scrollThumbsToNextSlide,
+    onPrevious: scrollThumbsToPreviousSlide,
+    wheelListenerNode: main.current!,
+  });
 
   function onDocumentLoadSuccess({
     numPages: nextNumPages,
@@ -103,7 +84,16 @@ export function Slides() {
         >
           <div className="slideshow__track">
             {Array.from(new Array(numPages), (_, index) => (
-              <Fragment key={`page_${index + 1}`}>
+              <div
+                ref={(node) => {
+                  if (node) {
+                    itemsRef.current.set(index, node);
+                  } else {
+                    itemsRef.current.delete(index);
+                  }
+                }}
+                key={`page_${index + 1}`}
+              >
                 <div
                   className="slideshow__item-number"
                   data-pdf-thumbnail-number={index}
@@ -118,7 +108,7 @@ export function Slides() {
                   onClick={() => setPageNumber(index)}
                   pageNumber={index + 1}
                 />
-              </Fragment>
+              </div>
             ))}
           </div>
           <div ref={main} className="slideshow__current">
